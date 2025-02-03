@@ -33,6 +33,7 @@
  * @returns {Array<StackFrame>=}
  */
 export function getFramesFromStack(stack) {
+debugger;
   if (!stack || (Cu && Cu.isDeadWrapper(stack))) {
     // If the global from which this error came from has been nuked,
     // stack is going to be a dead wrapper.
