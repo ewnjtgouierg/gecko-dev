@@ -538,6 +538,8 @@ var BrowserCommands = {
    * @param browser the browser containing the document we're interested in inspecting; can be null/omitted
    */
   pageInfo(documentURL, initialTab, imageElement, browsingContext, browser) {
+
+	  return;
     const args = { initialTab, imageElement, browsingContext, browser };
 
     documentURL =
