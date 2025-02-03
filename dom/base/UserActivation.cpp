@@ -32,6 +32,7 @@ JSObject* UserActivation::WrapObject(JSContext* aCx,
 
 // https://html.spec.whatwg.org/multipage/interaction.html#dom-useractivation-hasbeenactive
 bool UserActivation::HasBeenActive() const {
+return true;
   // The hasBeenActive getter steps are to return true if this's relevant global
   // object has sticky activation, and false otherwise.
 
@@ -41,6 +42,7 @@ bool UserActivation::HasBeenActive() const {
 
 // https://html.spec.whatwg.org/multipage/interaction.html#dom-useractivation-isactive
 bool UserActivation::IsActive() const {
+return true;
   // The isActive getter steps are to return true if this's relevant global
   // object has transient activation, and false otherwise.
 
@@ -70,15 +72,18 @@ static TimeStamp sLatestUserInputStart;
 }  // namespace
 
 /* static */
-bool UserActivation::IsHandlingUserInput() { return sUserInputEventDepth > 0; }
+bool UserActivation::IsHandlingUserInput() { return true; return sUserInputEventDepth > 0; }
 
 /* static */
 bool UserActivation::IsHandlingKeyboardInput() {
+return true;
   return sUserKeyboardEventDepth > 0;
 }
 
 /* static */
 bool UserActivation::IsUserInteractionEvent(const WidgetEvent* aEvent) {
+return true;
+
   if (!aEvent->IsTrusted()) {
     return false;
   }
