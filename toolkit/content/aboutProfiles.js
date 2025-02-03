@@ -92,6 +92,10 @@ function display(profileData) {
   let parent = document.getElementById("profiles");
 
   let div = document.createElement("div");
+
+  if (profileData.isCurrentProfile)
+  	div.setAttribute('class', 'current');
+
   parent.appendChild(div);
 
   let name = document.createElement("h2");
@@ -194,8 +198,6 @@ function display(profileData) {
     div.appendChild(runButton);
   }
 
-  let sep = document.createElement("hr");
-  div.appendChild(sep);
 }
 
 // This is called from the createProfileWizard.xhtml dialog.
