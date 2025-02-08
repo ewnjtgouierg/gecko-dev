@@ -573,7 +573,26 @@ JSAtom* FrameIter::maybeFunctionDisplayAtom() const {
         return wasmFrame().functionDisplayAtom();
       }
       if (isFunctionFrame()) {
-        return calleeTemplate()->fullDisplayAtom();
+
+		JSAtom* naturalName = calleeTemplate()->fullDisplayAtom();
+
+		Value namePropVal_v;
+
+		JS::Rooted<JSObject*> funObj(data_.cx_, JS_GetFunctionObject(calleeTemplate()));
+
+		if (GetPropertyPure(data_.cx_, funObj, NameToId(data_.cx_->names().name), &namePropVal_v))
+			{
+				JSString* jstr = namePropVal_v.toString();
+				JSAtom* namePropVal = AtomizeString(data_.cx_, jstr);
+				if (namePropVal != naturalName)
+					{
+						size_t length = JS_GetStringLength(jstr);
+						if (length>0) return namePropVal;
+					}
+			}
+
+        return naturalName;
+
       }
       return nullptr;
   }

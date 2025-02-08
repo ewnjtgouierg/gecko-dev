@@ -1736,20 +1736,6 @@ bool Console::PopulateConsoleNotificationInTheTargetScope(
 
       JS::Rooted<JSObject*> funObj(aCx, JS_GetFunctionObject(fun));
 
-JS::RootedValue result(aCx); 
-
-bool has;
-if (JS_HasProperty(aCx, funObj, "name", &has) && has
-		&& JS_GetProperty(aCx, funObj, "name", &result))
-	{
-		JSString * str = result.toString();
-	    size_t length = JS_GetStringLength(str);
-		char* buffer = (char*)malloc((length + 1) * sizeof(char));
-		JS_EncodeStringToBuffer(aCx, str, buffer, length);
-		buffer[length] = '\0';
-		printf("The name is: '%s'\n", buffer);
-	}
-
       // We want to store our stack in the function and have it stay alive.  But
       // we also need sane access to the C++ nsIStackFrame.  So store both a JS
       // wrapper and the raw pointer: the former will keep the latter alive.
